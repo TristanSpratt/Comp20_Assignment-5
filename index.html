@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Lucky for Life Lottery
+	</title>
+</head>
+<body>
+
+	<h1 style="display: auto; text-align: center; font-size: 3vw;">
+		Lottery Simulator
+	</h1>
+
+	<script language="javascript">
+
+		// Create the randomly picked numbers array:
+		var pickedNumbers = [];
+
+		// Fill the array with 5 numbers that don't repeat:
+		while (pickedNumbers.length < 5) {
+			duplicate = false;
+
+			randomNumber = Math.round(Math.random() * 48 + 1);
+			if (pickedNumbers.length > 0) {
+				for (i = 0; i < pickedNumbers.length; i++) {
+					if (pickedNumbers[i] == randomNumber) {
+						duplicate = true;
+						break
+					}
+				}
+			}
+			if (!duplicate) {
+				pickedNumbers.push(randomNumber);
+			}
+		}
+
+		// Sort the array:
+		pickedNumbers.sort(function(a, b) {return a - b});
+
+		// Display the randomly picked numbers:
+		document.write("My numbers: ");
+		for (i = 0; i < pickedNumbers.length; i++) {
+			document.write(pickedNumbers[i] + "\n");
+		}
+
+		// Randomly generate and display the lucky ball number:
+		var luckyBall = Math.round(Math.random() * 18 + 1);
+		document.write("<br>My lucky ball pick: " + luckyBall + "<br>");
+
+		// Prompt the user for their winning numbers and lucky ball number:
+		var stringInput = prompt("Please enter your 5 first numbers separated by spaces");
+		var inputLuckyBall = prompt("Please enter your lucky ball number");
+
+		// Split the user's winning numbers into an array:
+		var userNumbers = stringInput.split(" ");
+
+		// Display the user's chosen numbers and lucky ball pick:
+		document.write("<br>Your winning numbers: ");
+		for (i = 0; i < userNumbers.length; i++) {
+			document.write(userNumbers[i] + "\n");
+		}
+		document.write("<br>Your lucky ball pick: " + inputLuckyBall + "<br>");
+
+		// Find the number of matches between the user's first 5 numbers and the first 5 winning numbers:
+		var numberMatches = 0;
+		for (i = 0; i < userNumbers.length; i++) {
+			if (pickedNumbers.includes(parseInt(userNumbers[i]))) {
+				numberMatches++;
+			}
+		}
+
+		// Display the amount of matches within the first 5 numbers:
+		document.write("<br>" + numberMatches + " of my picked numbers matched your winning numbers.<br>");
+
+		// Check and display whether the lucky ball numbers matched or not:
+		var luckyBallMatch = (luckyBall == parseInt(inputLuckyBall))
+		if (luckyBallMatch){
+			document.write("My lucky ball number matched yours!<br>");
+		} 
+		else {
+			document.write("My lucky ball number did not match yours.<br>");
+		}
+
+		// Prize pool:
+
+		var prize = "0";
+
+		if (numberMatches == 0) {
+			if (luckyBallMatch) {
+				prize = "4";
+			}
+		}
+
+		if (numberMatches == 1) {
+			if (luckyBallMatch) {
+				prize = "6";
+			}
+		}
+
+		if (numberMatches == 2) {
+			prize = "3";
+			if (luckyBallMatch) {
+				prize = "25";
+			}
+		}
+
+		if (numberMatches == 3) {
+			prize = "20";
+			if (luckyBallMatch) {
+				prize = "150";
+			}
+		}
+
+		if (numberMatches == 4) {
+			prize = "200";
+			if (luckyBallMatch) {
+				prize = "5000";
+			}
+		}
+
+		if (numberMatches == 5) {
+			prize = "25,000 a YEAR for LIFE"
+			if (luckyBallMatch) {
+				prize = "7,000 a WEEK for LIFE";
+			}
+		}
+
+
+
+		document.write("<br>The payout for my pick would be: $" + prize);
+
+	</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
